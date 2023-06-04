@@ -26,8 +26,8 @@ int main(int argc, char **argv)
     map_control(argv, data);
     if (!(recursive_c(data->map, data->player_y, data->player_x)))
         err_msg("Error\nmap is impossible.");
-	map_free(data->map);
-	data->map = read_map(argv[1]);
+	//map_free(data->map);
+	//data->map = read_map(argv[1]);
 	if (!recursive_e(data->map, data->player_y, data->player_x))
 	    err_msg("Error\nmap is impossible.");
         

@@ -37,6 +37,7 @@ void	map_read_to_data(t_data *data)
 	i = 0;
 	j = 0;
 	fd = open(data->map_tmp, O_RDONLY);
+	map_free(data->map);
 	data->map = (char **)malloc(sizeof(char *) * data->map_height);
 	while (i < data->map_height)
 	{

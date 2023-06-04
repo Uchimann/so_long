@@ -15,6 +15,7 @@
 
 void err_msg(char *str)
 {
+    //free(data);
     ft_printf("%s",str);
     exit(0);
 }
