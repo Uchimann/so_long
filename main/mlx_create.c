@@ -1,17 +1,19 @@
-#include "solong.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_create.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+	+:+     */
+/*   By: icelebi <icelebi@student.42.fr>            +#+  +:+
+	+#+        */
+/*                                                +#+#+#+#+#+
+	+#+           */
+/*   Created: 2023/06/06 19:44:44 by icelebi           #+#    #+#             */
+/*   Updated: 2023/06/06 19:44:44 by icelebi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void data_init(t_data *data)
-{
-    data->mlx = mlx_init();
-    data->win = mlx_new_window(data->mlx, data->map_width * PNG_SIZE, (data->map_height * PNG_SIZE), "SoLong.h");
-    data->coin_collected = 0;
-    data->exit_count = 0;
-    data->step_count = 0;
-    data->wall_count = 0;
-    data->player_count = 0;
-    data->unwanted_character_count = 0;
-	
-}
+#include "solong.h"
 
 void	image_create(t_data *data)
 {
@@ -23,19 +25,18 @@ void	image_create(t_data *data)
 			&data->img.img_w, &data->img.img_h);
 	data->img.door = mlx_xpm_file_to_image(data->mlx, "../img/door.xpm",
 			&data->img.img_w, &data->img.img_h);
-	data->img.character = mlx_xpm_file_to_image(data->mlx, "../img/character.xpm",
-			&data->img.img_w, &data->img.img_h);
+	data->img.character = mlx_xpm_file_to_image(data->mlx,
+			"../img/character.xpm", &data->img.img_w, &data->img.img_h);
 }
 
 void	map_read_to_data(t_data *data)
 {
+	char	*area;
 	int		fd;
 	int		i;
 	int		j;
-	char	*area;
 
 	i = 0;
-	j = 0;
 	fd = open(data->map_tmp, O_RDONLY);
 	map_free(data->map);
 	data->map = (char **)malloc(sizeof(char *) * data->map_height);
@@ -69,8 +70,8 @@ void	map_background_put(t_data *data)
 		j = 0;
 		while (j < data->map_width)
 		{
-			mlx_put_image_to_window(data->mlx, data->win, data->img.bg,
-				j * PNG_SIZE, i * PNG_SIZE);
+			mlx_put_image_to_window(data->mlx, data->win, data->img.bg, j
+				* PNG_SIZE, i * PNG_SIZE);
 			j++;
 		}
 		i++;
@@ -85,35 +86,32 @@ void	map_obj_put(t_data *data, int i, int j)
 		while (j < data->map_width)
 		{
 			if (data->map[i][j] == '1')
-				mlx_put_image_to_window(data->mlx, data->win, data->img.wall,
-					j * PNG_SIZE, i * PNG_SIZE);
+				mlx_put_image_to_window(data->mlx, data->win, data->img.wall, j
+					* PNG_SIZE, i * PNG_SIZE);
 			else if (data->map[i][j] == 'C')
-				mlx_put_image_to_window(data->mlx, data->win, data->img.coin,
-					j * PNG_SIZE, i * PNG_SIZE);
+				mlx_put_image_to_window(data->mlx, data->win, data->img.coin, j
+					* PNG_SIZE, i * PNG_SIZE);
 			else if (data->map[i][j] == 'E')
-				mlx_put_image_to_window(data->mlx, data->win, data->img.door,
-					j * PNG_SIZE, i * PNG_SIZE);
+				mlx_put_image_to_window(data->mlx, data->win, data->img.door, j
+					* PNG_SIZE, i * PNG_SIZE);
 			else if (data->map[i][j] == 'P')
-				mlx_put_image_to_window(data->mlx, data->win, data->img.character,
-					j * PNG_SIZE, i * PNG_SIZE);
+				mlx_put_image_to_window(data->mlx, data->win,
+					data->img.character, j * PNG_SIZE, i * PNG_SIZE);
 			j++;
 		}
 		i++;
 	}
 }
 
-void mlx_create(t_data *data)
+void	mlx_create(t_data *data)
 {
 	printf("\n data coin count \n \n %d \n", data->coin_count);
-    data_init(data); // çalışıyor
-    image_create(data); // çalışıyor
-    map_read_to_data(data); // çalışıyor
-    map_background_put(data); // çalışıyor
-	map_obj_put(data, 0, 0); // çalışıyor
-	wall_control(data); // çalışıyor
-    
-	
+	data_init(data);
+	image_create(data);
+	map_read_to_data(data);
+	map_background_put(data);
+	map_obj_put(data, 0, 0);
+	wall_control(data);
 	hook(data);
-
 	mlx_loop(data->mlx);
 }

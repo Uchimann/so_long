@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_next_line_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yciftci <yciftci@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: icelebi <icelebi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 00:34:02 by yciftci           #+#    #+#             */
-/*   Updated: 2022/12/15 23:46:02 by yciftci          ###   ########.fr       */
+/*   Created: 2023/06/07 18:02:05 by icelebi           #+#    #+#             */
+/*   Updated: 2023/06/07 18:02:06 by icelebi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

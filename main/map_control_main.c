@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   map_control_main.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: icelebi <icelebi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/07 18:07:11 by icelebi           #+#    #+#             */
-/*   Updated: 2023/06/07 18:07:12 by icelebi          ###   ########.fr       */
+/*   Created: 2023/06/07 17:39:14 by icelebi           #+#    #+#             */
+/*   Updated: 2023/06/07 17:39:25 by icelebi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "solong.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	map_control(char **argv, t_data *data)
 {
-	int		i;
-	char	*ret;
+	char	*map_name;
+	char	*map_names;
 
-	if (!s)
-		return (NULL);
-	i = 0;
-	ret = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!ret)
-		return (NULL);
-	while (s[i])
-	{
-		ret[i] = (*f)(i, s[i]);
-		++i;
-	}
-	ret[i] = '\0';
-	return (ret);
+	map_name = argv[1];
+	map_names = ft_strjoin("map/", map_name);
+	data->map_tmp = map_names;
+	free(map_names);
+	ber_control(argv[1]);
+	tmp_control(argv[1]);
+	min_part_control(data);
+	bad_part_control(data->map);
+	size_control(data);
+	player_location(data);
+	exit_location(data);
 }

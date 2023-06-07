@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: icelebi <icelebi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/07 18:07:11 by icelebi           #+#    #+#             */
-/*   Updated: 2023/06/07 18:07:12 by icelebi          ###   ########.fr       */
+/*   Created: 2023/06/07 17:28:54 by icelebi           #+#    #+#             */
+/*   Updated: 2023/06/07 17:38:04 by icelebi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "solong.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	data_init(t_data *data)
 {
-	int		i;
-	char	*ret;
-
-	if (!s)
-		return (NULL);
-	i = 0;
-	ret = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!ret)
-		return (NULL);
-	while (s[i])
-	{
-		ret[i] = (*f)(i, s[i]);
-		++i;
-	}
-	ret[i] = '\0';
-	return (ret);
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, data->map_width * PNG_SIZE,
+			(data->map_height * PNG_SIZE), "SoLong.h");
+	data->coin_collected = 0;
+	data->exit_count = 0;
+	data->step_count = 0;
+	data->wall_count = 0;
+	data->player_count = 0;
+	data->unwanted_character_count = 0;
 }
