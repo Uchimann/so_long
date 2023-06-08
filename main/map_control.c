@@ -6,7 +6,7 @@
 /*   By: icelebi <icelebi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 16:02:36 by icelebi           #+#    #+#             */
-/*   Updated: 2023/06/07 18:39:28 by icelebi          ###   ########.fr       */
+/*   Updated: 2023/06/08 12:54:03 by icelebi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@ char	**read_map(char *mapname)
 {
 	char	**map;
 	char	*str;
-	char	file_path[100] = "../map/";
+	char	*file_path;
 	int		i;
 	int		fd;
 
 	i = 0;
+	file_path = ft_strdup("../map/");
 	ft_strcat(file_path, mapname);
 	fd = open(file_path, O_RDONLY);
+	free(file_path);
 	map = malloc(1000);
 	str = get_next_line(fd);
 	if (!str)
